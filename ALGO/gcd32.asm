@@ -101,7 +101,7 @@ div32	lda #0	        ;preset remainder to 0
 
 ; calculate gcd (greatest common divisor) of unsigned 32-bit ints
 ; using euclid's algorithm: gcd(a,b) = gcd(b, a mod b).
-; preferably call with a>b (or else first the iteration is wasted),
+; preferably call with a>b (or else the first iteration is wasted),
 ; and don't call with a=b=0.
 ; inputs: gcda, gcdb (4 bytes each)
 ; output: gcda (4 bytes)
