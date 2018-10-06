@@ -19,7 +19,7 @@ int main(int argc,char **argv) {
 	fclose(f);
 	for(int i=0;i<len;i++) {
 		printf("%d,",fil[i]);
-		if(i%19==18) printf("\n");
+		if(i%16==15) printf("\n");
 	}
 	return 0;
 }

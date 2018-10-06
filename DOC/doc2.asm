@@ -1,12 +1,11 @@
 ; petscii doc viewer with colours and scrolling
 ; ntsc-compatible version with 1 row less in both pal and ntsc (for equality)
 ; extremely link-unfriendly because it eats memory
-; 0800-09ff: code
-; 0a00-2000: unused (i guess some text could be moved to here)
-; 2000-2800: blank charset
-; 2800-7800: text
-; 7800-a6e0: generated unrolled scroll routine
-; a700-fff9 is free
+; 0800-0fff: blank charset
+; 1000-11ff: code
+; 1200-61ff: text
+; 6200-90e0: generated unrolled scroll routine
+; 9100-fff9 is free
 
 textlength    = 98    ; number of lines with text
 
@@ -71,14 +70,15 @@ start	sei
 	sta $d016
 	lda #$03
 	sta $dd00
-	lda #0
-	sta screenat+0
-	sta screenat+1
-	sta inertia
-	sta $d015
+	ldx #0
+	stx $d418
+	stx $d015
+	stx screenat+0
+	stx screenat+1
+	stx inertia
 	; create blank charset
 	; ensure in other ways that 0900-0fff is zeroed
-	tax
+	txa
 -	sta $0800,x
 	inx
 	bne -
