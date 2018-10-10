@@ -25,6 +25,7 @@ colour	= 14
 
 zp1	= $fe
 zp2	= $fc
+sinuspos = $fb
 
 	!to "techtech.prg",cbm
 	* = $0801
@@ -40,7 +41,7 @@ irq1	nop
 	nop
 	ldy #7
 	sty zp1
-	ldy #6
+	dey
 	sty zp2
 	ldx #0
 tloop	lda d016tab,x  ;5 ;badline: spend 23 cycles
@@ -240,16 +241,6 @@ sinloop	; use lower 3 bits of sinus to set x-scroll in $d016
 +	sty sinuspos
 	; next irq
 
-jmp rett
-	ldx #47
--	lda #1
-	sta d018tab,x
-	lda #0
-	sta d016tab,x
-	dex
-	bpl -
-
-rett
 	lda #$32
 	sta $d012
 	lda #$1b
@@ -261,7 +252,6 @@ rett
 	asl $d019
 	jmp $ea7e
 
-sinuspos !byte 0
 sinus	!hex 00 00 00 00 01 01 02 03 04 05 06 07 08 0a 0b 0c 0e 0f 11 13
 	!hex 14 16 18 1a 1b 1b 1d 1f 21 22 24 26 27 29 2a 2c 2d 2e 30 31 32
 	!hex 33 34 35 35 36 36 37 37 37 37 37 37 37 36 36 35 35 34 33 32 
