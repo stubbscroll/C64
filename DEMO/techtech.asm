@@ -58,7 +58,7 @@ tloop2	lda d016tab,x  ;5 =5 ;regular line: spend 63 cycles
 	inx            ;2 =20
 	dec zp1        ;3 =23
 	beq +          ;2 =25
-        ldy #6         ;2 =27
+	ldy #6         ;2 =27
 -	dey            ;5*5-1 = 29 =56
 	bne -
 	nop            ;2 =58
