@@ -3,6 +3,7 @@
 ; algorithm: generate numbers as described in the problem, use a huge bit array
 ; to mark seen numbers and detect the first duplicate and hope we have enough
 ; memory
+; runtime: 1 minute 55 seconds
 
 	CHROUT = $ffd2
 
