@@ -284,6 +284,39 @@ divisor	!byte 0,0,0,0,0
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+; convert unsigned 16-bit int to 24-bit (6-digit) bcd
+; input value: inbcd
+; output value: outbcd
+; clobbered: a,x
+; warning, don't run with an interrupt that doesn't handle decimal flag
+; properly, such as the KERNAL
+; stolen from http://codebase64.org/doku.php?id=base:more_hexadecimal_to_decimal_conversion
+int16tobcd ldx #0
+	stx outbcd+0
+	stx outbcd+1
+	stx outbcd+2
+	ldx #15
+	sed
+-	asl inbcd+0
+	rol inbcd+1
+	lda outbcd+0
+	adc outbcd+0
+	sta outbcd+0
+	lda outbcd+1
+	adc outbcd+1
+	sta outbcd+1
+	lda outbcd+2
+	adc outbcd+2
+	sta outbcd+2
+	dex
+	bpl -
+	cld
+	rts
+inbcd	!byte 0,0
+outbcd	!byte 0,0,0
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 ; convert unsigned 24-bit int to 32-bit (8-digit) bcd
 ; input value: inbcd
 ; output value: outbcd
