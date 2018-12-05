@@ -20,6 +20,33 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+; multiply 16-bit integer in mul1 by 10, result in product
+; this time, don't mess up endianness (should be little-endian)
+; clobber: a, mul1
+mul1	!byte 0,0
+product	!byte 0,0
+
+mul10	asl mul1+0
+	rol mul1+1
+	lda mul1+0
+	sta product+0
+	lda mul1+1
+	sta product+1
+	asl mul1+0
+	rol mul1+1
+	asl mul1+0
+	rol mul1+1
+	lda mul1+0
+	clc
+	adc product+0
+	sta product+0
+	lda mul1+1
+	adc product+1
+	sta product+1
+	rts
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 ; multiply two unsigned 8-bit integers and get 16-bit product
 ; inputs: mul1, mul2
 ; output: product
