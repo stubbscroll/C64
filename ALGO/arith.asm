@@ -563,6 +563,6 @@ printchar cpy #0
 	bne +
 	cmp #0
 	beq -
-	ldy #1 ; y=1: print all digits from here
+	iny ; y=1: print all digits from here
 +	ora #$30
 	jmp CHROUT
